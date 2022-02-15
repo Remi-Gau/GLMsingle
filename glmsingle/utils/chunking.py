@@ -30,9 +30,10 @@ def chunking(vect, num, chunknum=None):
     """
     if chunknum is None:
         nchunk = int(np.ceil(len(vect)/num))
-        f = []
-        for point in range(nchunk):
-            f.append(vect[point*num:np.min((len(vect), int((point+1)*num)))])
+        f = [
+            vect[point * num : np.min((len(vect), int((point + 1) * num)))]
+            for point in range(nchunk)
+        ]
 
         return np.asarray(f)
     else:

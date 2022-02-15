@@ -23,12 +23,9 @@ def normalisemax(m, dim=None):
     # input
     if dim is None:
         dim = ch(isr(m), 1, 0)
-    # do it
     if dim == 'global':
-        f = m / np.max(m)
-    else:
-        all_max = np.max(m, dim)
-        f = np.stack(
+        return m / np.max(m)
+    all_max = np.max(m, dim)
+    return np.stack(
             [m[:, i] / thismax for i, thismax in enumerate(all_max)]
             ).T
-    return f

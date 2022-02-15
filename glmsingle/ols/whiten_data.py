@@ -56,9 +56,8 @@ def whiten_data(data, design, extra_regressors=False, poly_degs=None):
 
     for i, (y, X) in enumerate(zip(data, design)):
         polynomials = make_polynomial_matrix(X.shape[0], poly_degs)
-        if extra_regressors:
-            if extra_regressors[i].any():
-                polynomials = np.c_[polynomials, extra_regressors[i]]
+        if extra_regressors and extra_regressors[i].any():
+            polynomials = np.c_[polynomials, extra_regressors[i]]
 
         project_matrix = make_projection_matrix(polynomials)
         whitened_design.append(project_matrix @ X)

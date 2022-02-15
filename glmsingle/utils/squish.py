@@ -20,8 +20,6 @@ def squish(m, num):
     # calculate the new dimensions
     newdim = np.r_[np.prod(msize[:num]), msize[num:]].tolist()
 
-    # do the reshape
-    f = np.reshape(m, newdim)
     # tack on a 1 to handle the special case of squishing everything together
 
-    return f
+    return np.reshape(m, newdim)

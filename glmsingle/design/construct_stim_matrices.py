@@ -33,10 +33,7 @@ def construct_stim_matrices(m, prenumlag=0, postnumlag=0, wantwrap=0):
     m = np.asarray(m)
 
     # get out early
-    if not prenumlag and not postnumlag:
-        f = m.T
-        return f
-    else:
+    if prenumlag or postnumlag:
         nconds, nvols = m.shape
 
         # do it
@@ -49,6 +46,9 @@ def construct_stim_matrices(m, prenumlag=0, postnumlag=0, wantwrap=0):
                 m[p, :], prenumlag, postnumlag, wantwrap
             )
 
+    else:
+        f = m.T
+        return f
     return f
 
 
@@ -77,17 +77,7 @@ def construct_stim_matrix(v, prenumlag, postnumlag, wantwrap=0):
     f = np.zeros((len(v), total))
     for p in range(total):
         i = p + 1
-        if False:
-            pass
-            # shift = [0 - prenumlag + (p-1)]
-            # f[:, p] = np.roll(v, shift, axis=(0, 1)).T
-        else:
-            temp = -prenumlag + (i - 1)
-            if temp < 0:
-                pass
-                # vindx = range(len(v), 1 - temp)
-                # findx = range(len(v)+temp)
-                # f[findx, p] = v[vindx]
-            else:
-                f[temp:, p] = v[: len(v) - temp]
+        temp = -prenumlag + (i - 1)
+        if temp >= 0:
+            f[temp:, p] = v[: len(v) - temp]
     return f

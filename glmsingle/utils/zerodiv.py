@@ -29,14 +29,13 @@ def zerodiv(data1, data2, val=0, wantcaution=1):
     if np.isscalar(data2):
         if data2 == 0:
             f = np.tile(val, data1.shape)
+        elif wantcaution and abs(data2) < 1e-5:
+            print(
+                'warning: abs value of divisor is less than 1e-5.'
+                'treating the divisor as 0.')
+            f = np.tile(val, data1.shape)
         else:
-            if wantcaution and abs(data2) < 1e-5:
-                print(
-                    'warning: abs value of divisor is less than 1e-5.'
-                    'treating the divisor as 0.')
-                f = np.tile(val, data1.shape)
-            else:
-                f = data1/data2
+            f = data1/data2
 
     else:
         # do it

@@ -55,12 +55,7 @@ def robustrange(m):
 
     # deal with max
     if vals[4] <= pmx:  # if the 99.9 is reasonably small, use it
-        if absmx <= vals[2] + 1.1*(vals[4]-vals[2]):
-            # actually, if the absolute max isn't too big, use that
-            finalmx = absmx
-        else:
-            finalmx = vals[4]
-
+        finalmx = absmx if absmx <= vals[2] + 1.1*(vals[4]-vals[2]) else vals[4]
     else:
         # hmm, something is funny.  probably there are outliers.
         # let's chop off and re-run.
@@ -69,11 +64,7 @@ def robustrange(m):
 
     # deal with min
     if vals[0] >= pmn:
-        if absmn >= vals[2] - 1.1*(vals[2]-vals[0]):
-            finalmn = absmn
-        else:
-            finalmn = vals[0]
-
+        finalmn = absmn if absmn >= vals[2] - 1.1*(vals[2]-vals[0]) else vals[0]
     else:
         rerun = 1
         m = m[np.logical_not(m < pmn)]

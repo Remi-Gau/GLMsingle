@@ -111,14 +111,10 @@ def calc_cod_stack(yhat, y):
         [np.sum(a**2, axis=0) for a in y]
         ).sum(axis=0)
 
-    # calculate global R2
-
-    r2s = 100*(1 - zerodiv(
+    return 100*(1 - zerodiv(
         numer,
         denom,
         val=np.nan,
         wantcaution=0
         )
     )
-
-    return r2s

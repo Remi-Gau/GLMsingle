@@ -107,7 +107,7 @@ def olsmatrix(X, lambd=0, verbose=True):
     good = np.invert(bad)
 
     # report warning
-    if not np.any(good) == 1:
+    if np.any(good) != 1:
         if verbose:
             print(
                 "regressors are all zeros. \n"

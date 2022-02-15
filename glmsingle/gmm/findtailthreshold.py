@@ -41,11 +41,7 @@ def findtailthreshold(v, figpath=None):
     # linearly spaced values between median and upper robust range
 
     # inputs
-    if figpath is None:
-        wantfig = 0
-    else:
-        wantfig = 1
-
+    wantfig = 0 if figpath is None else 1
     # quick massaging of input
     v2 = v[np.isfinite(v)]
     if len(v2) > maxsz:

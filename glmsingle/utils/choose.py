@@ -13,8 +13,4 @@ function f = choose(flag,yes,no)
 
 def choose(flag, yes, no):
 
-    if flag:
-        f = yes
-    else:
-        f = no
-    return f
+    return yes if flag else no

@@ -13,12 +13,11 @@ def projectionmatrix(X):
     """
     if X is None:
         return 1
-    else:
-        X = np.mat(X)
-        # Note (mat)
-        # It is no longer recommended to use this class, even for linear algebra.
-        # Instead use regular arrays. The class may be removed in the future.
-        return np.eye(X.shape[0]) - (X*(np.linalg.inv(X.T*X)*X.T))
+    X = np.mat(X)
+    # Note (mat)
+    # It is no longer recommended to use this class, even for linear algebra.
+    # Instead use regular arrays. The class may be removed in the future.
+    return np.eye(X.shape[0]) - (X*(np.linalg.inv(X.T*X)*X.T))
 
 
 def constructpolynomialmatrix(n, degrees):

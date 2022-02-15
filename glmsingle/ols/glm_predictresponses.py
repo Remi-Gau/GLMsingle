@@ -52,11 +52,10 @@ def glm_predictresponses(model, design, tr, numtimepoints, dimdata=0):
     # calc
     ismatrixcase = type(design) != list
 
-    if not ismatrixcase:
-        if design[0].ndim == 1:
-            # handle special case of onoff design
-            design = [p[:, np.newaxis] for p in design]
-    
+    if not ismatrixcase and design[0].ndim == 1:
+        # handle special case of onoff design
+        design = [p[:, np.newaxis] for p in design]
+
     dimdata = 0
     dimtime = dimdata + 1
     if type(model) == list:
